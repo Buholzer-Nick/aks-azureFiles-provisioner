@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: azurefile-provisioner-metrics
+  namespace: azurefile-provisioner-system
+  labels:
+    app: azurefile-provisioner
+spec:
+  selector:
+    app: azurefile-provisioner
+  ports:
+    - name: metrics
+      port: 8080
+      targetPort: metrics

@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: private-azurefile-custom
+provisioner: ylabs.ch/azurefile-share-provisioner
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
+parameters:
+  skuName: Standard_LRS

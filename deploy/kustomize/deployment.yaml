@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azurefile-provisioner
+  namespace: azurefile-provisioner-system
+  labels:
+    app: azurefile-provisioner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azurefile-provisioner
+  template:
+    metadata:
+      labels:
+        app: azurefile-provisioner
+    spec:
+      serviceAccountName: azurefile-provisioner
+      containers:
+        - name: manager
+          image: your-registry/azurefile-provisioner:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: azurefile-provisioner-config
+          ports:
+            - name: metrics
+              containerPort: 8080
+            - name: health
+              containerPort: 8081
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: health
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: health
+            initialDelaySeconds: 5
+            periodSeconds: 10

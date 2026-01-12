@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: azurefile-provisioner-config
+  namespace: azurefile-provisioner-system
+data:
+  LEADER_ELECTION_ENABLED: "true"
+  LEADER_ELECTION_ID: "azurefile-provisioner-leader"
+  METRICS_ADDR: ":8080"
+  HEALTH_ADDR: ":8081"
+  AZURE_SUBSCRIPTION_ID: ""
+  AZURE_RESOURCE_GROUP: ""
+  AZURE_STORAGE_ACCOUNT: ""
+  AZURE_FILE_SERVER: ""
