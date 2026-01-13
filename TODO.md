@@ -8,3 +8,5 @@
 - Enforce required config (resource group/storage account) at startup with a clear error path.
 - Add controller tests for ShareClient error classes and StorageClass parameter parsing.
 - Add kustomize overlays (config/manager) or optional Helm chart if needed by deployment workflows.
+- Add storage account existence validation (and optional creation) using Azure SDK.
+- Support multiple storage accounts via StorageClass parameters and per-PVC selection.

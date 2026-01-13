@@ -24,10 +24,10 @@ import (
 )
 
 const (
-	shareOverrideAnnotation = "ylabs.ch/azurefile-share-override"
-	shareNameAnnotation     = "ylabs.ch/azurefile-share-name"
-	retainShareAnnotation   = "ylabs.ch/retain-share"
-	finalizerName           = "ylabs.ch/azurefile-provisioner/finalizer"
+	shareOverrideAnnotation = "kliggo.ch/share-override"
+	shareNameAnnotation     = "kliggo.ch/share-name"
+	retainShareAnnotation   = "kliggo.ch/retain-share"
+	finalizerName           = "kliggo.ch/azurefile-provisioner/finalizer"
 	eventShareEnsuring      = "ShareEnsuring"
 	eventShareReady         = "ShareReady"
 	eventShareError         = "ShareError"

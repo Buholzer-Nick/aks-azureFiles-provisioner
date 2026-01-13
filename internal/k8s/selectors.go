@@ -10,7 +10,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-const ManagedProvisioner = "ylabs.ch/azurefile-share-provisioner"
+const ManagedProvisioner = "kliggo.ch/azurefile-share-provisioner"
 
 // IsManagedPVC returns true when the PVC declares a StorageClass reference.
 func IsManagedPVC(pvc *corev1.PersistentVolumeClaim) bool {
