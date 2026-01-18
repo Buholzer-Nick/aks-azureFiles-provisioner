@@ -1,0 +1,10 @@
+.git
+.github
+deploy
+
+/bin
+/dist
+
+**/*_test.go
+
+.DS_Store

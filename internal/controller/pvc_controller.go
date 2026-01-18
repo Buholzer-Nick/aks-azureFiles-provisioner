@@ -27,7 +27,7 @@ const (
 	shareOverrideAnnotation = "kliggo.ch/share-override"
 	shareNameAnnotation     = "kliggo.ch/share-name"
 	retainShareAnnotation   = "kliggo.ch/retain-share"
-	finalizerName           = "kliggo.ch/azurefile-provisioner/finalizer"
+	finalizerName           = "kliggo.ch/azurefile-provisioner"
 	eventShareEnsuring      = "ShareEnsuring"
 	eventShareReady         = "ShareReady"
 	eventShareError         = "ShareError"
