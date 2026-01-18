@@ -14,12 +14,13 @@ spec:
     metadata:
       labels:
         app: azurefile-provisioner
+        azure.workload.identity/use: "true"
     spec:
       serviceAccountName: azurefile-provisioner
       containers:
         - name: manager
           image: your-registry/azurefile-provisioner:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: azurefile-provisioner-config
