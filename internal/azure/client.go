@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
-	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	"github.com/Azure/azure-sdk-for-go/sdk/storage/azfile/share"
 )
 
@@ -19,15 +18,6 @@ type Client struct {
 }
 
 var ErrInvalidShareInput = errors.New("invalid share input")
-
-// NewClient builds a ShareClient with DefaultAzureCredential.
-func NewClient(accountName string) (*Client, error) {
-	cred, err := azidentity.NewDefaultAzureCredential(nil)
-	if err != nil {
-		return nil, fmt.Errorf("create default credential: %w", err)
-	}
-	return NewClientWithCredential(accountName, cred)
-}
 
 // NewClientWithCredential builds a ShareClient with the provided credential.
 func NewClientWithCredential(accountName string, credential azcore.TokenCredential) (*Client, error) {

@@ -12,3 +12,12 @@ data:
   AZURE_RESOURCE_GROUP: ""
   AZURE_STORAGE_ACCOUNT: ""
   AZURE_FILE_SERVER: ""
+  # Auth mode values: workload (default), managed, env.
+  # Managed identity: set AZURE_AUTH_MODE="managed"; set AZURE_CLIENT_ID for user-assigned MI,
+  # or leave AZURE_CLIENT_ID empty for system-assigned MI.
+  AZURE_AUTH_MODE: "workload"
+  # Auth options (set only one path):
+  # - Workload Identity: set AZURE_TENANT_ID and AZURE_CLIENT_ID
+  # - Managed Identity: set AZURE_CLIENT_ID
+  AZURE_TENANT_ID: ""
+  AZURE_CLIENT_ID: ""

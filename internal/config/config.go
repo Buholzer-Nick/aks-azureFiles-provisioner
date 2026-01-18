@@ -10,6 +10,7 @@ const (
 	defaultLeaderElectionID = "azurefile-provisioner-leader"
 	defaultMetricsAddr      = ":8080"
 	defaultHealthAddr       = ":8081"
+	defaultAuthMode         = "workload"
 )
 
 // Config holds runtime configuration loaded from the environment.
@@ -22,6 +23,9 @@ type Config struct {
 	ResourceGroup         string
 	StorageAccount        string
 	Server                string
+	AuthMode              string
+	TenantID              string
+	ClientID              string
 }
 
 // Load reads configuration from environment variables.
@@ -40,6 +44,9 @@ func Load() (Config, error) {
 		ResourceGroup:         readEnv("AZURE_RESOURCE_GROUP", ""),
 		StorageAccount:        readEnv("AZURE_STORAGE_ACCOUNT", ""),
 		Server:                readEnv("AZURE_FILE_SERVER", ""),
+		AuthMode:              readEnv("AZURE_AUTH_MODE", defaultAuthMode),
+		TenantID:              readEnv("AZURE_TENANT_ID", ""),
+		ClientID:              readEnv("AZURE_CLIENT_ID", ""),
 	}, nil
 }
 

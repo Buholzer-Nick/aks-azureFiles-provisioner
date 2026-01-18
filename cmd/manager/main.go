@@ -48,7 +48,18 @@ func main() {
 		os.Exit(1)
 	}
 
-	shareClient, err := azure.NewClient(cfg.StorageAccount)
+	cred, authMode, err := azure.NewCredential(azure.CredentialConfig{
+		AuthMode: cfg.AuthMode,
+		TenantID: cfg.TenantID,
+		ClientID: cfg.ClientID,
+	})
+	if err != nil {
+		logger.Error(err, "create azure credential")
+		os.Exit(1)
+	}
+	logger.Info("azure authentication configured", "mode", authMode)
+
+	shareClient, err := azure.NewClientWithCredential(cfg.StorageAccount, cred)
 	if err != nil {
 		logger.Error(err, "create share client")
 		os.Exit(1)
