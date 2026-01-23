@@ -7,6 +7,8 @@ import (
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
+
+	"aks-azureFiles-controller/internal/constants"
 )
 
 func TestBuildPV(t *testing.T) {
@@ -37,8 +39,8 @@ func TestBuildPV(t *testing.T) {
 	if pv.Spec.CSI == nil {
 		t.Fatalf("PV CSI source is nil")
 	}
-	if pv.Spec.CSI.Driver != azureFileCSIDriver {
-		t.Fatalf("Driver = %q, want %q", pv.Spec.CSI.Driver, azureFileCSIDriver)
+	if pv.Spec.CSI.Driver != constants.AzureFileCSIDriver {
+		t.Fatalf("Driver = %q, want %q", pv.Spec.CSI.Driver, constants.AzureFileCSIDriver)
 	}
 	if pv.Spec.CSI.VolumeHandle != "rg#account#share" {
 		t.Fatalf("VolumeHandle = %q, want %q", pv.Spec.CSI.VolumeHandle, "rg#account#share")

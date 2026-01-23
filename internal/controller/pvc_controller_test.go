@@ -17,6 +17,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
 	"aks-azureFiles-controller/internal/azure"
+	"aks-azureFiles-controller/internal/constants"
 	"aks-azureFiles-controller/internal/k8s"
 	"aks-azureFiles-controller/internal/logging"
 	"aks-azureFiles-controller/internal/naming"
@@ -99,8 +100,8 @@ func TestReconcileCreatesPV(t *testing.T) {
 	if err := k8sClient.Get(ctx, client.ObjectKeyFromObject(pvc), updated); err != nil {
 		t.Fatalf("Get PVC error = %v", err)
 	}
-	if updated.Annotations[shareNameAnnotation] != shareName {
-		t.Fatalf("share annotation = %q, want %q", updated.Annotations[shareNameAnnotation], shareName)
+	if updated.Annotations[constants.ShareNameAnnotation] != shareName {
+		t.Fatalf("share annotation = %q, want %q", updated.Annotations[constants.ShareNameAnnotation], shareName)
 	}
 }
 

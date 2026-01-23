@@ -19,6 +19,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
 	"aks-azureFiles-controller/internal/azure"
+	"aks-azureFiles-controller/internal/constants"
 	"aks-azureFiles-controller/internal/k8s"
 	"aks-azureFiles-controller/internal/logging"
 	"aks-azureFiles-controller/internal/naming"
@@ -66,7 +67,7 @@ func TestReconcileAddsFinalizer(t *testing.T) {
 	if err := k8sClient.Get(ctx, client.ObjectKeyFromObject(pvc), updated); err != nil {
 		t.Fatalf("Get PVC error = %v", err)
 	}
-	if !containsFinalizer(updated.Finalizers, finalizerName) {
+	if !containsFinalizer(updated.Finalizers, constants.FinalizerName) {
 		t.Fatalf("finalizer missing")
 	}
 }
@@ -87,7 +88,7 @@ func TestReconcileDeletionIdempotent(t *testing.T) {
 
 	pvc := basePVC()
 	pvc.Spec.StorageClassName = stringPtr("azurefile")
-	pvc.Finalizers = []string{finalizerName}
+	pvc.Finalizers = []string{constants.FinalizerName}
 
 	now := metav1.NewTime(time.Now())
 	pvc.DeletionTimestamp = &now
@@ -96,7 +97,7 @@ func TestReconcileDeletionIdempotent(t *testing.T) {
 	if err != nil {
 		t.Fatalf("ComputeShareName error = %v", err)
 	}
-	pvc.Annotations = map[string]string{shareNameAnnotation: shareName}
+	pvc.Annotations = map[string]string{constants.ShareNameAnnotation: shareName}
 
 	pv, err := k8s.BuildPV(pvc, shareName, "rg", "account", "server", corev1.PersistentVolumeReclaimDelete)
 	if err != nil {
@@ -131,7 +132,7 @@ func TestReconcileDeletionIdempotent(t *testing.T) {
 	updated := &corev1.PersistentVolumeClaim{}
 	err = k8sClient.Get(ctx, client.ObjectKeyFromObject(pvc), updated)
 	if err == nil {
-		if containsFinalizer(updated.Finalizers, finalizerName) {
+		if containsFinalizer(updated.Finalizers, constants.FinalizerName) {
 			t.Fatalf("finalizer not removed")
 		}
 	} else {

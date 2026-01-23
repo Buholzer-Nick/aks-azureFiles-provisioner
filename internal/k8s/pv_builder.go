@@ -10,12 +10,12 @@ import (
 	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
+	"aks-azureFiles-controller/internal/constants"
 	"aks-azureFiles-controller/internal/naming"
 )
 
 const (
-	azureFileCSIDriver = "file.csi.azure.com"
-	pvNameHashLength   = 12
+	pvNameHashLength = 12
 )
 
 var ErrInvalidPVInput = errors.New("invalid pv input")
@@ -78,7 +78,7 @@ func BuildPV(
 			},
 			PersistentVolumeSource: corev1.PersistentVolumeSource{
 				CSI: &corev1.CSIPersistentVolumeSource{
-					Driver:       azureFileCSIDriver,
+					Driver:       constants.AzureFileCSIDriver,
 					VolumeHandle: volumeHandle,
 					VolumeAttributes: map[string]string{
 						"resourceGroup":  resourceGroup,

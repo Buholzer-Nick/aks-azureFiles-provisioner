@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: azurefile-provisioner-config
   namespace: azurefile-provisioner-system
+# See internal/config/config.go and README.md for full configuration documentation.
 data:
   LEADER_ELECTION_ENABLED: "true"
   LEADER_ELECTION_ID: "azurefile-provisioner-leader"
